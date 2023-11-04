@@ -1,0 +1,122 @@
+Planteamiento de base de datos -> Proyecto Final IPC2 - Jorge Anibal Bravo Rodríguez
+
+Categorías ofertas empleo 
+- Id
+- Valor
+- Habilitada 
+
+Tipo Usuario
+- id    -> 1: admin, 2: empresa, 3: usuario		
+- tipo
+
+Usuario -> 4 Tipos 
+- Id  - Username 
+- Nombre
+- Contraseña -> Encriptada en la base de datos 
+- Direccion
+- Numeros de telefono ------
+- Correo electronico 
+- CUI
+- Fecha de nacimiento (o fundacion)
+- Tipo
+
+	Numeros de telefono 
+	- username 
+	- numero 
+
+	Solicitante
+	- username 
+	- curriculum 
+	- categorias de interes[]
+		
+		Categorías de interes
+		- username 
+		- id Categoria ofertas de empleo
+		
+
+	Empleador 
+	- username
+	- mision 
+	- vision 
+	- metodo de pago -> tarjetas de credito / debito 
+
+
+
+ModalidadEmpleo
+- id
+- modalidad
+
+Oferta de empleo 
+- Id 
+- Nombre
+- Descripcion
+- Categoria -> fk
+- Fecha publicacion 
+- Fecha limite de aplicacion 
+- Salario aprox
+- Modalidad (presencial, remoto, hibrido)
+- Ubicacion 
+- Detalles
+- Empleador -> IdEmpleador
+- Solicitante [] 		      -> NO APLICA pues para eso está la tabla de aplicaciones
+- Fecha limite de postulacion
+- Estado ? -> Finalizada ?            -Seleccion, activa, finalizada  -> manejarlos por los ids de los estados
+	
+	Aplicacion 
+	- Id Oferta
+	- id Solicitante
+	- razon de la aplicacion -> texto con la razon por la que se quiere el empleo 
+	- Estado  -> Entrevistable, rechazado, aceptado? -> el usuario puede RETIRAR LA POSTULACION -> fk Estados postulacion
+
+		
+		Entrevista
+		- Id
+		- Id Oferta
+		- Id UsuarioSolicitante 
+		- Fecha
+		- Hora
+		- Lugar
+		- Estado -> Pendiente, Finalizada
+
+		- Reporte -> Texto con el reporte al finalizar la entrevista 
+
+		Estados Oferta de empleo?
+		- id
+		- estado -> Seleccion, activa, finalizada, entrevista?
+
+		Estados postulacion
+		- id 
+		- Estado -> Seleccion, entrevistable, rechazado, aceptado, postulacion retirada 
+
+	Eliminacion Oferta -> Para constancia de "eliminacion" y notificacion a interesados del motivo de esta
+	- Id Oferta
+	- Motivo eliminacion 
+
+Notificaciones ???? -> O solo manejarlas en el sistema ?
+
+-> Para reportes admin
+	Cantidad usuarios ?   -> Movido a la tabl: Tipo Usuario
+	- Tipo
+	- Cantidad
+
+	Cantidad visitas invitados
+	- Cantidad
+
+	Total ingresos -> comisiones cobradas por contratacion  
+	- fecha del ingreso 
+	- id categoría 
+
+Parametros 
+- Id
+- Fecha modificacion ?
+- Valor 
+	1. Comision por contratacion ? -> 150 inicial 
+	2. Suscripcion  A SOLICITANTES para usar el sistema -> 0 Inicial ? -> Dijo que no se cobrará
+
+	Forma alternativa para la comision de contratacion:
+	Comision
+	- id
+	- valor
+	- fecha 	
+		
+	
