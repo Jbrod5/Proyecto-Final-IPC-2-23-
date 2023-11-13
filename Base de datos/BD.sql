@@ -17,6 +17,14 @@ CREATE TABLE TipoUsuario(
     cantidad INT NOT NULL
 );
 
+    -- Llenar la tabla de tipos de usuario con los tipos de usuario
+    INSERT INTO TipoUsuario (id, tipo, cantidad) VALUES (1, "Administrador", 0);
+    INSERT INTO TipoUsuario (id, tipo, cantidad) VALUES (2, "Empleador"    , 0);
+    INSERT INTO TipoUsuario (id, tipo, cantidad) VALUES (3, "Solicitante"  , 0);
+    INSERT INTO TipoUsuario (id, tipo, cantidad) VALUES (4, "Visitante"    , 0);
+
+
+
 -- Usuario, tipo referencia a tabla Tipos de usuario
 CREATE TABLE Usuario(
     username VARCHAR(50) PRIMARY KEY NOT NULL, 
@@ -27,6 +35,8 @@ CREATE TABLE Usuario(
     cui INT NOT NULL, 
     fecha_nacimiento DATETIME NOT NULL, 
     tipo INT,
+
+    perfil_completado TINYINT(1) NOT NULL,
 
     CONSTRAINT FK_USUARIO_TO_TIPOUSUARIO FOREIGN KEY (tipo) REFERENCES TipoUsuario(id)
 );
@@ -44,7 +54,8 @@ CREATE TABLE Usuario(
     -- Especializacion de usuario solicitante - username unico
     CREATE TABLE Solicitante(
         username VARCHAR(50) NOT NULL,
-        curriculum TINYINT(1) NOT NULL, 
+        -- curriculum TINYINT(1) NOT NULL,
+        curriculum VARCHAR(250) NOT NULL, 
 
         CONSTRAINT UNIQUE_USUARIO_SOLICITANTE UNIQUE (username),
         CONSTRAINT FK_SOLICITANTE_TO_USUARIO FOREIGN KEY (username) REFERENCES Usuario(username)
