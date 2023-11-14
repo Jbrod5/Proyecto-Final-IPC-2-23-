@@ -178,9 +178,6 @@ public class JobCategoryDB {
             ResultSet resultSet = selectAll.executeQuery();
             
             while(resultSet.next()){
-                if(resultSet.getInt("habilitada") != 0){
-                
-                }
                 categories.add(
                         new JobCategory(
                                 resultSet.getInt("id"),

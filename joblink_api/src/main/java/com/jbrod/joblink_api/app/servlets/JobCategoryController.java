@@ -15,9 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.http.HttpResponse;
 import org.apache.http.entity.ContentType;
 
 /**
@@ -86,11 +83,11 @@ public class JobCategoryController extends HttpServlet{
                     JobCategory newCategory = objectMapper.readValue(request.getInputStream(), JobCategory.class);
                     
                     //2. Agregar la categoria nueva
-                    categoryService.createJobCategory(newCategory);
+                    JobCategory newCategoryDB =  categoryService.createJobCategory(newCategory);
                     
                     //3. Responder al con la nueva categoria
                     response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
-                    objectMapper.writeValue(response.getWriter(), newCategory);
+                    objectMapper.writeValue(response.getWriter(), newCategoryDB);
                     
                     break;
                 case "change-status":

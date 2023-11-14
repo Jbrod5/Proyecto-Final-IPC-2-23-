@@ -100,6 +100,12 @@ CREATE TABLE EstadosOfertaEmpleo(
     estado VARCHAR(25)
 );
 
+     -- Llenar la tabla de estados de ofertas de empleo
+    INSERT INTO EstadosOfertaEmpleo (estado) VALUES ("Seleccion"  ); -- 1
+    INSERT INTO EstadosOfertaEmpleo (estado) VALUES ("Activa"     ); -- 2
+    INSERT INTO EstadosOfertaEmpleo (estado) VALUES ("Finalizada" ); -- 3
+    INSERT INTO EstadosOfertaEmpleo (estado) VALUES ("Entrevista" ); -- 4
+
 -- Ofertas de empleo disponibles publicadas por empleadores 
 CREATE TABLE OfertaEmpleo(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
