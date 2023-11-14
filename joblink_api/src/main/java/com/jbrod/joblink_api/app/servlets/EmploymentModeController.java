@@ -34,7 +34,7 @@ public class EmploymentModeController extends HttpServlet{
             
             ObjectMapper objectMapper = new  ObjectMapper().registerModule(new JavaTimeModule());
             
-            switch("action"){
+            switch(action){
                 case "get-all": 
                     List<EmploymentMode> listEmploymentModes = employmentModeDB.getAllModalities();
                     objectMapper.writeValue(response.getWriter(), listEmploymentModes);
