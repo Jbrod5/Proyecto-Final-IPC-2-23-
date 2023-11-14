@@ -9,11 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * 
+ * Manejo de categorias en la base de datos.
  * @author Jorge
  */
 public class JobCategoryDB {
@@ -56,14 +54,15 @@ public class JobCategoryDB {
             
             PreparedStatement insert = connection.prepareStatement(INSERT);
             //El id es autoincremental 
-            insert.setString(1, jobCategory.getCategory());
+            String jobCategoryString = jobCategory.getCategory();
+            insert.setString(1, jobCategoryString);
             //Habilitado por defecto 
             int enabled = 1; 
             insert.setInt(2, enabled);
             
             insert.executeUpdate();
             System.out.println("Categoria almacenada correctamente en la base de datos");
-            return jobCategory;
+            return selectCategoryByCategorystring(jobCategoryString).get();
             
         } catch (SQLException ex) {
             System.out.println("Hubo un error al insertar en la base de datos.");
@@ -158,6 +157,9 @@ public class JobCategoryDB {
             update.setInt(1, newStatus);
             update.setInt(2, id);
             
+            update.executeUpdate(); 
+            return true; 
+            
         } catch (SQLException ex) {
             System.out.println("Hubo un error al actualizar el estado de la categoria en la base de datos: SQLException.");
             ex.printStackTrace();
@@ -176,6 +178,9 @@ public class JobCategoryDB {
             ResultSet resultSet = selectAll.executeQuery();
             
             while(resultSet.next()){
+                if(resultSet.getInt("habilitada") != 0){
+                
+                }
                 categories.add(
                         new JobCategory(
                                 resultSet.getInt("id"),
@@ -192,4 +197,33 @@ public class JobCategoryDB {
         
         return null;
     }
+    
+    public List<JobCategory> getAllEnabledCategories(){
+        
+        try {
+            PreparedStatement selectAll = connection.prepareStatement(SELECT_ALL);
+            
+            List<JobCategory> categories = new ArrayList<>();
+            ResultSet resultSet = selectAll.executeQuery();
+            
+            while(resultSet.next()){
+                if(resultSet.getInt("habilitada") != 0){
+                    categories.add(
+                           new JobCategory(
+                                   resultSet.getInt("id"),
+                                   resultSet.getString("categoria"),
+                                   resultSet.getInt("habilitada") != 0
+                       )
+                   );
+                }
+            }
+            return categories;
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error al obtener las categorias desde la base de datos: SQLException.");
+            ex.printStackTrace();
+        }
+        
+        return null;
+    }
+    
 }
