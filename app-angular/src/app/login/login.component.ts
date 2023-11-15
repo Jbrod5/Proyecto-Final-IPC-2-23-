@@ -33,10 +33,18 @@ export class LoginComponent {
   }
 
   submit(): void {
+
+    const valores = this.login.value; 
+    console.log(valores.username);
+    console.log(valores.password);
+
+
     console.log('submit!!!');
    // if (this.login.valid) {
       console.log('validopibes');
       this.user = this.login.value as User;
+      console.log(this.user.username);
+      console.log(this.user.password);
       this.userService.createUser(this.user).subscribe({  
         next: (created: User) => {
           console.log("creataeds " + created);
