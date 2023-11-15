@@ -193,7 +193,7 @@ public class JobOfferDB {
             return true; 
             
         } catch (SQLException ex) {
-            Logger.getLogger(JobOfferDB.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
         return false; 
     }

@@ -138,6 +138,11 @@ CREATE TABLE OfertaEmpleo(
         id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         estado VARCHAR(25)
     );
+        -- Llenar la tabla de estados de aplicacion a empleo
+        INSERT INTO EstadosAplicacion (estado) VALUES ("Seleccion"      ); -- 1
+        INSERT INTO EstadosAplicacion (estado) VALUES ("Entrevistable"  ); -- 2
+        INSERT INTO EstadosAplicacion (estado) VALUES ("Rechazado"      ); -- 3
+        INSERT INTO EstadosAplicacion (estado) VALUES ("Aceptado"       ); -- 4
 
     -- Tabla de aplicaciones, tupla unica oferta _ solicitante 
     CREATE TABLE APLICACION(
